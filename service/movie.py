@@ -10,17 +10,19 @@ class MovieService:
         return self.movie_dao.get_all_movies()
 
     def get_movie_by(self, **kwargs):
-
         return self.movie_dao.get_movie_by_many_filters(**kwargs)
 
+    def get_movie_by_id(self, movie_id):
+        return self.movie_dao.get_movie_by_id(movie_id)
+
     def get_movie_by_director_id(self, director_id):
-        return self.session.query(Movie).filter(Movie.director_id == director_id).all()
+        return self.movie_dao.get_movie_by_director_id(director_id)
 
     def get_movie_by_genre_id(self, genre_id):
-        return self.session.query(Movie).filter(Movie.genre_id == genre_id).all()
+        return self.movie_dao.get_movie_by_genre_id(genre_id)
 
     def get_movie_by_year(self, year):
-        return self.session.query(Movie).filter(Movie.year == year).all()
+        return self.get_movie_by_year(year)
 
     def add_movie(self, data):
         return self.movie_dao.create_movie(**data)

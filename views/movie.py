@@ -23,17 +23,19 @@ class MoviesView(Resource):
         movie_service.add_movie(request.json)
         return "", 201
 
+    def put(self):
+        movie_service.update_movie(request.json)
+        return "", 201
+
 
 @movie_ns.route('/<int:movie_id>')
 class MovieView(Resource):
 
-    def get(self, movie_id: int):
-        return movie_schema.dump(movie_service.get_movie_by(movie_id)), 200
+    def get(self, movie_id):
+        return movie_schema.dump(movie_service.get_movie_by_id(movie_id)), 200
 
     def delete(self, movie_id: int):
         movie_service.delete_movie(movie_id)
         return "", 201
 
-    def put(self, movie_id: int):
-        movie_service.update_movie(request.json)
-        return "", 201
+
