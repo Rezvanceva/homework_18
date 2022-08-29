@@ -23,9 +23,6 @@ class MoviesView(Resource):
         movie_service.add_movie(request.json)
         return "", 201
 
-    def put(self):
-        movie_service.update_movie(request.json)
-        return "", 201
 
 
 @movie_ns.route('/<int:movie_id>')
@@ -36,6 +33,10 @@ class MovieView(Resource):
 
     def delete(self, movie_id: int):
         movie_service.delete_movie(movie_id)
+        return "", 201
+
+    def put(self, movie_id):
+        movie_service.update_movie(movie_id)
         return "", 201
 
 

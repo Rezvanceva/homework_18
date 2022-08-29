@@ -1,3 +1,6 @@
+import kwargs as kwargs
+from flask import request
+
 from dao.model.models import Movie
 class MovieDAO:
 
@@ -37,10 +40,10 @@ class MovieDAO:
             self.session.rollback()
 
 
-    def update(self, kwargs):
+    def update(self, movie_id):
         try:
-            self.session.query(Movie).filter(Movie.id == kwargs.get("id")).update(
-                kwargs
+            self.session.query(Movie).filter(Movie.id == movie_id).update(
+                request.json
             )
             self.session.commit()
         except Exception as e:
